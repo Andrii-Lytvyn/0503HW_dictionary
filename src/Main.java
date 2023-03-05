@@ -32,6 +32,13 @@
 язык программирования Python
 Не найдено
 код, который нужен, чтобы исправить несовершенство ранее написанного кода
+
+Дебажить
+Выпадашка
+git
+аутсорс
+Бот
+
  */
 
 import java.io.*;
@@ -40,21 +47,14 @@ import java.util.*;
 public class Main {
 
   public static void main(String[] args) throws IOException {
-    File inputFile = new File("Res/dict.txt");
     Map<String, String> dictionary = new HashMap<>();
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    BufferedReader fileReader = new BufferedReader(new FileReader(inputFile));
-    for (String line = fileReader.readLine(); line != null; line = fileReader.readLine()) {
-      int space = line.indexOf(':');
-      String term = line.substring(0, space);
-      String meaning = line.substring(space + 2);
-      dictionary.put(term.toLowerCase(), meaning);
-    }
+    fillDictionary(dictionary);
     List<String> searchWords = new ArrayList<>();
-    int m = Integer.parseInt(br.readLine());
-    for (int i = 0; i < m; i++) {
-      searchWords.add(br.readLine().toLowerCase());
-    }
+    addSearchWords(searchWords);
+    findPrintWords(dictionary, searchWords);
+  }
+
+  private static void findPrintWords(Map<String, String> dictionary, List<String> searchWords) {
     for (String searchWord : searchWords) {
       if (!(dictionary.get(searchWord) == null)) {
         System.out.println(dictionary.get(searchWord));
@@ -63,6 +63,26 @@ public class Main {
       }
     }
   }
+
+  private static void addSearchWords(List<String> searchWords) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int m = Integer.parseInt(br.readLine());
+    for (int i = 0; i < m; i++) {
+      searchWords.add(br.readLine().toLowerCase());
+    }
+  }
+
+  private static void fillDictionary(Map<String, String> dictionary) throws IOException {
+    File inputFile = new File("Res/dict.txt");
+    BufferedReader fileReader = new BufferedReader(new FileReader(inputFile));
+    for (String line = fileReader.readLine(); line != null; line = fileReader.readLine()) {
+      int space = line.indexOf(':');
+      String term = line.substring(0, space);
+      String meaning = line.substring(space + 2);
+      dictionary.put(term.toLowerCase(), meaning);
+    }
+  }
+
 }
 
 
