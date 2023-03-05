@@ -34,9 +34,32 @@
 код, который нужен, чтобы исправить несовершенство ранее написанного кода
  */
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Main {
 
-  public static void main(String[] args) {
-    System.out.println("Hello world!");
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    int n = Integer.parseInt(br.readLine());
+    Map<String, String> dictionary = new HashMap<>();
+    for (int i = 0; i < n; i++) {
+      String line = br.readLine();
+      int space = line.indexOf(':');
+      String term = line.substring(0, space);
+      String meaning = line.substring(space+2);
+      dictionary.put(term, meaning);
+    }
+
+    for (Map.Entry<String, String> entry : dictionary.entrySet()) {
+      //System.out.println("Key: " + entry.getKey() + " Value: " + entry.getValue());
+      System.out.println( entry.getKey());
+      System.out.println(entry.getValue());
+    }
   }
+  // dictionary.values().forEach(System.out::println);
+
 }
