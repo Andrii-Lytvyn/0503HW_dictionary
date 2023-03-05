@@ -45,7 +45,6 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-
   public static void main(String[] args) throws IOException {
     Map<String, String> dictionary = new HashMap<>();
     fillDictionary(dictionary);
@@ -66,23 +65,32 @@ public class Main {
 
   private static void addSearchWords(List<String> searchWords) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    int m = Integer.parseInt(br.readLine());
-    for (int i = 0; i < m; i++) {
-      searchWords.add(br.readLine().toLowerCase());
+    try {
+      int m = Integer.parseInt(br.readLine());
+      for (int i = 0; i < m; i++) {
+        searchWords.add(br.readLine().toLowerCase());
+      }
+    } catch (NumberFormatException e) {
+      System.err.println("Не корректный ввод");
     }
   }
 
   private static void fillDictionary(Map<String, String> dictionary) throws IOException {
-    File inputFile = new File("Res/dict.txt");
-    BufferedReader fileReader = new BufferedReader(new FileReader(inputFile));
-    for (String line = fileReader.readLine(); line != null; line = fileReader.readLine()) {
-      int space = line.indexOf(':');
-      String term = line.substring(0, space);
-      String meaning = line.substring(space + 2);
-      dictionary.put(term.toLowerCase(), meaning);
+    try {
+      File inputFile = new File("Res/dict.txt");
+      BufferedReader fileReader = new BufferedReader(new FileReader(inputFile));
+      for (String line = fileReader.readLine(); line != null; line = fileReader.readLine()) {
+        int space = line.indexOf(':');
+        String term = line.substring(0, space);
+        String meaning = line.substring(space + 2);
+        dictionary.put(term.toLowerCase(), meaning);
+      }
+    } catch (FileNotFoundException e) {
+      System.err.println("Файл не найден: " + e.getMessage());
+    } catch (StringIndexOutOfBoundsException m) {
+      System.err.println("Ошибка форматирования файла" + m.getMessage());
     }
   }
-
 }
 
 
