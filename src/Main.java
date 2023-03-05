@@ -37,8 +37,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Main {
 
@@ -50,14 +49,35 @@ public class Main {
       String line = br.readLine();
       int space = line.indexOf(':');
       String term = line.substring(0, space);
-      String meaning = line.substring(space+2);
+      String meaning = line.substring(space + 2);
       dictionary.put(term, meaning);
     }
+    List<String> searchWords = new ArrayList();
 
+    int m = Integer.parseInt(br.readLine());
+    for (int i = 0; i < m; i++) {
+      searchWords.add(br.readLine());
+    }
+    int counter = searchWords.size();
     for (Map.Entry<String, String> entry : dictionary.entrySet()) {
+      String key = entry.getKey().toLowerCase(Locale.ROOT);
+      for (int i = 0; i < searchWords.size(); i++) {
+
+        String search = searchWords.get(i).toLowerCase();
+        if (search.contains(key)) {
+          System.out.println(entry.getValue());
+        } else {
+          counter++;
+          if(counter==searchWords.size()+1)
+          {
+            System.out.println("Не найдено");
+          }
+        }
+      }
+
       //System.out.println("Key: " + entry.getKey() + " Value: " + entry.getValue());
-      System.out.println( entry.getKey());
-      System.out.println(entry.getValue());
+      //System.out.println(entry.getKey());
+      // System.out.println(entry.getValue());
     }
   }
   // dictionary.values().forEach(System.out::println);
