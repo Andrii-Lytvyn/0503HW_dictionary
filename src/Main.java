@@ -34,19 +34,17 @@
 код, который нужен, чтобы исправить несовершенство ранее написанного кода
  */
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.*;
 
 public class Main {
 
   public static void main(String[] args) throws IOException {
-    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    int n = Integer.parseInt(br.readLine());
+    File inputFile = new File("Res/dict.txt");
     Map<String, String> dictionary = new HashMap<>();
-    for (int i = 0; i < n; i++) {
-      String line = br.readLine();
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    BufferedReader fileReader = new BufferedReader(new FileReader(inputFile));
+    for (String line = fileReader.readLine(); line != null; line = fileReader.readLine()) {
       int space = line.indexOf(':');
       String term = line.substring(0, space);
       String meaning = line.substring(space + 2);
