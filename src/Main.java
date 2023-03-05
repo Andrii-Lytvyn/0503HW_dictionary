@@ -44,9 +44,9 @@ public class Main {
 
   public static void main(String[] args) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    int m = Integer.parseInt(br.readLine());
+    int n = Integer.parseInt(br.readLine());
     Map<String, String> dictionary = new HashMap<>();
-    for (int i = 0; i < m; i++) {
+    for (int i = 0; i < n; i++) {
       String line = br.readLine();
       int space = line.indexOf(':');
       String term = line.substring(0, space);
