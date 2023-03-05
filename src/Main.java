@@ -50,20 +50,28 @@ public class Main {
       int space = line.indexOf(':');
       String term = line.substring(0, space);
       String meaning = line.substring(space + 2);
-      dictionary.put(term, meaning);
+      dictionary.put(term.toLowerCase(), meaning);
     }
     List<String> searchWords = new ArrayList();
 
     int m = Integer.parseInt(br.readLine());
     for (int i = 0; i < m; i++) {
-      searchWords.add(br.readLine());
+      searchWords.add(br.readLine().toLowerCase());
     }
     int counter = searchWords.size();
-    for (Map.Entry<String, String> entry : dictionary.entrySet()) {
-      String key = entry.getKey().toLowerCase(Locale.ROOT);
-      for (int i = 0; i < searchWords.size(); i++) {
 
-        String search = searchWords.get(i).toLowerCase();
+    for (int i = 0; i < searchWords.size(); i++) {
+      if ((dictionary.get(searchWords.get(i)) == null)) {
+        System.out.println("Не найдено");
+      } else {
+        System.out.println(dictionary.get(searchWords.get(i)));
+      }
+    }
+/*
+    for (Map.Entry<String, String> entry : dictionary.entrySet()) {
+      String key = entry.getKey();
+      for (int i = 0; i < searchWords.size(); i++) {
+        String search = searchWords.get(i);
         if (search.contains(key)) {
           System.out.println(entry.getValue());
         } else {
@@ -74,12 +82,12 @@ public class Main {
           }
         }
       }
-
-      //System.out.println("Key: " + entry.getKey() + " Value: " + entry.getValue());
-      //System.out.println(entry.getKey());
-      // System.out.println(entry.getValue());
-    }
+*/
+    //System.out.println("Key: " + entry.getKey() + " Value: " + entry.getValue());
+    //System.out.println(entry.getKey());
+    // System.out.println(entry.getValue());
   }
-  // dictionary.values().forEach(System.out::println);
-
 }
+// dictionary.values().forEach(System.out::println);
+
+
